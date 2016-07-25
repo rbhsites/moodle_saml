@@ -7,6 +7,21 @@ global $CFG, $PAGE, $OUTPUT;
 //HTTPS is required in this page when $CFG->loginhttps enabled
 $PAGE->https_required();
 
+/// Initialize variables
+$errormsg = '';
+$errorcode = 0;
+
+if (isset($_GET['errorcode']) && is_numeric($_GET['errorcode'])) {
+  $errorcode = $_GET['errorcode'];
+}
+
+switch ($errorcode) {
+  case 3:
+    $errormsg = get_string("invalidlogin");
+    break;
+  // TODO: Implement other codes?
+}
+
 // get wantsurl from session and pass to the samlUrl
 $samlUrl = "index.php";
 if(isset($SESSION->wantsurl)) {
